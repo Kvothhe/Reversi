@@ -20,6 +20,11 @@ int main()
     printf("\n");
     printa(e);
     printf("\n");
-
+    greet();
     return 0;
+}
+
+void greet()
+{
+    printf("Olá Mundo!\n");
 }
