@@ -10,7 +10,12 @@ void printa(ESTADO e)
 {
     char c = ' ';
 
-
+    if (e.modo == 0)
+        printf("Modo: 2jog");
+    if (e.peca == VALOR_O)
+        printf("-- Jogador: O\n");
+    else
+        printf("-- Jogador: X\n");
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             switch (e.grelha[i][j]) {
@@ -32,6 +37,8 @@ void printa(ESTADO e)
         }
         printf("\n");
     }
+    printf("\n");
+    printf( "X: %d  |  O: %d\n",e.scoresx,e.scoreo);
 
 }
 
