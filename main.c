@@ -6,12 +6,11 @@
 int main()
 {
 
-    int x,y, nivel;
+    int x,y;
     char linha[50], file[20];
     char c1,c2;
     int validas[512] = {};
     int v;
-    int test[4];
     ESTADO e = {0};
 
     // estado inicial do tabuleiro. Inicio do jogo!
@@ -58,7 +57,7 @@ int main()
                 sscanf(linha, "%c %d %d", &c1, &x, &y);
                 zerarValidas(validas);
                 capturapecas(&e,x,y,validas,&v);
-                push(e);
+                //push(e);
                 break;
             case 'S':
                 valida(e, validas,&v);

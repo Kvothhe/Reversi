@@ -346,7 +346,7 @@ int posv(ESTADO e,int validas[],int k,int l,int p,int*v)
 
 void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
 {
-    int a_it,b_it, i, check;
+    int a_it,b_it, check;
 
     check = 0;
     //Come Baixo
@@ -462,9 +462,16 @@ void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
     {
         e->grelha[a][b] = e->peca;
         e->peca = contrario(e->peca);
+        scores(e);
+        printa(*e);
+        push(*e);
     }
-    scores(e);
-    printa(*e);
+    else
+    {
+        scores(e);
+        printa(*e);
+        printf("\nJogada Inválida\n");
+    }
 }
 void zerarValidas(int validas[])
 {
@@ -489,9 +496,9 @@ void scores(ESTADO* e)
     e->scoreo = 0;
     e->scoresx = 0;
     int i,j;
-    for(int i = 0;i<8;i++)
+    for(i = 0;i<8;i++)
     {
-        for(int j = 0;j<8;j++)
+        for(j = 0;j<8;j++)
         {
             if(e->grelha[i][j] == VALOR_X)
                 e->scoresx++;
