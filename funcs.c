@@ -106,12 +106,13 @@ void valida(ESTADO e, int validas[],int *v)
     int i, j, z, x, y,p;
 
     i = 0;
-    validas[0] = 0;
     validarJog(e, validas,v);
     ordenar(validas, *v);
-
     darXy(validas[i], &x , &y, &p);
-    for(j = 0; j<8;j++)
+
+
+
+    for(j = 0; j < 8;j++)
     {
         for (z = 0; z < 8; ++z)
         {
@@ -163,15 +164,16 @@ void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
     //Cima
     x = a;
     y = b;
-    for (i = 0, x -= 1; i < 8 && fim != 1; ++i,--x)
+    for (i = 0, x -= 1; i < 8 && fim != 1 && x != -1 && y != -1 && x != 8 && y != 8; ++i,--x)
     {
         if (sit == 1 && e.grelha[x][y] == VAZIA)
         {
             fim = 1;
             validas[*v] = (x * 100) + (y * 10) + 0;
+            //printf("%d\n", validas[*v]);
             ++*v;
         }
-        if (e.grelha[x][y] == contrario(e.peca))
+        if (e.grelha[x][y] == contrario(e.peca) && x >= 0 && y >= 0 && x < 8 && y < 8)
             sit = 1;
         else
         {
@@ -183,16 +185,17 @@ void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
     x = a;
     y = b;
     sit = fim = 0;
-    for (i = 0, x += 1; i < 8 && fim != 1; ++i,++x)
+    for (i = 0, x += 1; i < 8 && fim != 1 && x != -1 && y != -1 && x != 8 && y != 8; ++i,++x)
     {
         if (sit == 1 && e.grelha[x][y] == VAZIA)
         {
             fim = 1;
             validas[*v] = x * 100 + y * 10 + 4;
+            //printf("%d\n", validas[*v]);
             ++*v;
             //printf("%d %d\n", x, y);
         }
-        if (e.grelha[x][y] == contrario(e.peca))
+        if (e.grelha[x][y] == contrario(e.peca) && x >= 0 && y >= 0 && x < 8 && y < 8)
             sit = 1;
         else
         {
@@ -204,16 +207,17 @@ void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
     x = a;
     y = b;
     sit = fim = 0;
-    for (i = 0, y -= 1; i < 8 && fim != 1; ++i,--y)
+    for (i = 0, y -= 1; i < 8 && fim != 1 && x != -1 && y != -1 && x != 8 && y != 8; ++i,--y)
     {
         if (sit == 1 && e.grelha[x][y] == VAZIA)
         {
             fim = 1;
             validas[*v] = x * 100 + y * 10 + 6;
+            //printf("%d\n", validas[*v]);
             ++*v;
             //printf("%d %d\n", x, y);
         }
-        if (e.grelha[x][y] == contrario(e.peca))
+        if (e.grelha[x][y] == contrario(e.peca) && x >= 0 && y >= 0 && x < 8 && y < 8)
             sit = 1;
         else
         {
@@ -225,16 +229,17 @@ void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
     x = a;
     y = b;
     sit = fim = 0;
-    for (i = 0, y += 1; i < 8 && fim != 1; ++i,++y)
+    for (i = 0, y += 1; i < 8 && fim != 1 && x != -1 && y != -1 && x != 8 && y != 8; ++i,++y)
     {
         if (sit == 1 && e.grelha[x][y] == VAZIA)
         {
             fim = 1;
             validas[*v] = x * 100 + y * 10 + 2;
+            //printf("%d\n", validas[*v]);
             ++*v;
             //printf("%d %d\n", x, y);
         }
-        if (e.grelha[x][y] == contrario(e.peca))
+        if (e.grelha[x][y] == contrario(e.peca) && x >= 0 && y >= 0 && x < 8 && y < 8)
             sit = 1;
         else
         {
@@ -246,16 +251,17 @@ void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
     x = a;
     y = b;
     sit = fim = 0;
-    for (i = 0, y -= 1, x -= 1; i < 8 && fim != 1; ++i,--y, --x)
+    for (i = 0, y -= 1, x -= 1; i < 8 && fim != 1 && x != -1 && y != -1 && x != 8 && y != 8; ++i,--y, --x)
     {
         if (sit == 1 && e.grelha[x][y] == VAZIA)
         {
             fim = 1;
             validas[*v] = x * 100 + y * 10 + 7;
+            //printf("%d\n", validas[*v]);
             ++*v;
-            //printf("%d %d\n", x, y);
+            //printf("lol %d %d\n", x, y);
         }
-        if (e.grelha[x][y] == contrario(e.peca))
+        if (e.grelha[x][y] == contrario(e.peca) && x >= 0 && y >= 0 && x < 8 && y < 8)
             sit = 1;
         else
         {
@@ -267,16 +273,17 @@ void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
     x = a;
     y = b;
     sit = fim = 0;
-    for (i = 0, y -= 1, x += 1; i < 8 && fim != 1; ++i,--y, ++x)
+    for (i = 0, y -= 1, x += 1; i < 8 && fim != 1 && x != -1 && y != -1 && x != 8 && y != 8; ++i,--y, ++x)
     {
         if (sit == 1 && e.grelha[x][y] == VAZIA)
         {
             fim = 1;
             validas[*v] = x * 100 + y * 10 + 5;
+            //printf("%d\n", validas[*v]);
             ++*v;
             //printf("%d %d\n", x, y);
         }
-        if (e.grelha[x][y] == contrario(e.peca))
+        if (e.grelha[x][y] == contrario(e.peca) && x >= 0 && y >= 0 && x < 8 && y < 8)
             sit = 1;
         else
         {
@@ -288,16 +295,17 @@ void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
     x = a;
     y = b;
     sit = fim = 0;
-    for (i = 0, y += 1, x -= 1; i < 8 && fim != 1; ++i,++y, --x)
+    for (i = 0, y += 1, x -= 1; i < 8 && fim != 1 && x != -1 && y != -1 && x != 8 && y != 8; ++i,++y, --x)
     {
         if (sit == 1 && e.grelha[x][y] == VAZIA)
         {
             fim = 1;
             validas[*v] = x * 100 + y * 10 + 1;
+            //printf("%d\n", validas[*v]);
             ++*v;
             //printf("%d %d\n", x, y);
         }
-        if (e.grelha[x][y] == contrario(e.peca))
+        if (e.grelha[x][y] == contrario(e.peca) && x >= 0 && y >= 0 && x < 8 && y < 8)
             sit = 1;
         else
         {
@@ -309,16 +317,17 @@ void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
     x = a;
     y = b;
     sit = fim = 0;
-    for (i = 0, y += 1, x += 1; i < 8 && fim != 1; ++i,++y, ++x)
+    for (i = 0, y += 1, x += 1; i < 8 && fim != 1 && x != -1 && y != -1 && x != 8 && y != 8; ++i,++y, ++x)
     {
         if (sit == 1 && e.grelha[x][y] == VAZIA)
         {
             fim = 1;
             validas[*v] = x * 100 + y * 10 + 3;
+            //printf("%d\n", validas[*v]);
             ++*v;
             //printf("%d %d\n", x, y);
         }
-        if (e.grelha[x][y] == contrario(e.peca))
+        if (e.grelha[x][y] == contrario(e.peca) && x >= 0 && y >= 0 && x < 8 && y < 8)
             sit = 1;
         else
         {
@@ -643,7 +652,7 @@ int alea(ESTADO e,int validas[], int *v)
     time_t t;
     srand((unsigned)time(&t));
     r = (rand()%5);
-    if (r < (*v) && r >0)
+    if (r < (*v-1) && r >0)
         return r;
 }
 
