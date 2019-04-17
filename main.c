@@ -70,10 +70,7 @@ int main()
                 break;
             case 'H':
                 //validas[0] = "\0";
-                for (int k = 0; k < 512 && validas[k] != 888 ; ++k) {
-                    printf("%d", validas[k]);
-                    putchar('\n');
-                }
+                hint(e,validas,&v);
                 // Sugestão de jogada. Deve ser colocado um ‘?’ no sitio sugerido.
                 break;
             case 'U':
