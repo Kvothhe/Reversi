@@ -56,7 +56,7 @@ int main()
             case 'J':
                 sscanf(linha, "%c %d %d", &c1, &x, &y);
                 zerarValidas(validas);
-                capturapecas(&e,x,y,validas,&v);
+                capturapecas(&e,&x,&y,validas,&v);
                 //push(e);
                 break;
             case 'S':

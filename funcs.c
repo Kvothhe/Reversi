@@ -94,7 +94,7 @@ void darXy(int c, int *x, int *y,int *d)
         {
             *x = 0;
             *y = 0;
-            *d = 0;
+            *d = c;
         }
     }
 }
@@ -344,17 +344,18 @@ int posv(ESTADO e,int validas[],int k,int l,int p,int*v)
 }
 
 
-void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
+void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
 {
     int a_it,b_it, check;
 
     check = 0;
     //Come Baixo
-    if(posv(*e,validas,a,b,0,v))
+    if(posv(*e,validas,*a,*b,0,v))
     {
         //e->grelha[a][b] = e->peca;
+        //printf("\n%d %d\n", *a, *b);
         check = 1;
-        a_it = a + 1, b_it = b;
+        a_it = *a + 1, b_it = *b;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
             e->grelha[a_it][b_it] = e->peca;
@@ -363,11 +364,12 @@ void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
         //e->peca = contrario(e->peca);
     }
     //Come Cima
-    if(posv(*e,validas,a,b,4,v))
+    if(posv(*e,validas,*a,*b,4,v))
     {
         //e->grelha[a][b] = e->peca;
+        //printf("\n%d %d\n", *a, *b);
         check = 1;
-        a_it = a - 1, b_it = b;
+        a_it = *a - 1, b_it = *b;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
             e->grelha[a_it][b_it] = e->peca;
@@ -377,11 +379,12 @@ void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
         //e->peca = contrario(e->peca);
     }
     //Come Direita
-    if(posv(*e,validas,a,b,6,v))
+    if(posv(*e,validas,*a,*b,6,v))
     {
         //e->grelha[a][b] = e->peca;
+        //printf("\n%d %d\n", *a, *b);
         check = 1;
-        a_it = a, b_it = b + 1;
+        a_it = *a, b_it = *b + 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
             e->grelha[a_it][b_it] = e->peca;
@@ -390,11 +393,12 @@ void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
         //e->peca = contrario(e->peca);
     }
     //Come Esquerda
-    if(posv(*e,validas,a,b,2,v))
+    if(posv(*e,validas,*a,*b,2,v))
     {
         //e->grelha[a][b] = e->peca;
+        //printf("\n%d %d\n", *a, *b);
         check = 1;
-        a_it = a, b_it = b - 1;
+        a_it = *a, b_it = *b - 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
             e->grelha[a_it][b_it] = e->peca;
@@ -403,11 +407,12 @@ void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
         //e->peca = contrario(e->peca);
     }
     //Come Cima Esquerda
-    if(posv(*e,validas,a,b,3,v))
+    if(posv(*e,validas,*a,*b,3,v))
     {
         //e->grelha[a][b] = e->peca;
+        //printf("\n%d %d\n", *a, *b);
         check = 1;
-        a_it = a - 1, b_it = b - 1;
+        a_it = *a - 1, b_it = *b - 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
             e->grelha[a_it][b_it] = e->peca;
@@ -417,11 +422,12 @@ void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
         //e->peca = contrario(e->peca);
     }
     //Come Baixo Esquerda
-    if(posv(*e,validas,a,b,1,v))
+    if(posv(*e,validas,*a,*b,1,v))
     {
         //e->grelha[a][b] = e->peca;
+        //printf("\n%d %d\n", *a, *b);
         check = 1;
-        a_it = a+1, b_it = b - 1;
+        a_it = *a+1, b_it = *b - 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
             e->grelha[a_it][b_it] = e->peca;
@@ -431,11 +437,12 @@ void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
         //e->peca = contrario(e->peca);
     }
     //Come Cima Direita
-    if(posv(*e,validas,a,b,5,v))
+    if(posv(*e,validas,*a,*b,5,v))
     {
         //e->grelha[a][b] = e->peca;
+        //printf("\n%d %d\n", *a, *b);
         check = 1;
-        a_it = a -1, b_it = b + 1;
+        a_it = *a -1, b_it = *b + 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
             e->grelha[a_it][b_it] = e->peca;
@@ -445,11 +452,12 @@ void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
         //e->peca = contrario(e->peca);
     }
     //Come Baixo Direita
-    if(posv(*e,validas,a,b,7,v))
+    if(posv(*e,validas,*a,*b,7,v))
     {
         //e->grelha[a][b] = e->peca;
+        //printf("\n%d %d\n", *a, *b);
         check = 1;
-        a_it = a+1, b_it = b + 1;
+        a_it = *a + 1, b_it = *b + 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
             e->grelha[a_it][b_it] = e->peca;
@@ -460,11 +468,13 @@ void capturapecas(ESTADO* e,int a,int b,int *validas,int *v)
     }
     if (check == 1)
     {
-        e->grelha[a][b] = e->peca;
+        e->grelha[*a][*b] = e->peca;
         e->peca = contrario(e->peca);
         scores(e);
         printa(*e);
         push(*e);
+        *a = 8;
+        *b = 8;
     }
     else
     {
