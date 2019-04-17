@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "estado.h"
+#include <time.h>
 
 int pCima(char c)
 {
@@ -623,3 +624,64 @@ void carregaEstado(char* nome, ESTADO* estado)
     fclose(file);
 }
 
+int alea(ESTADO e,int validas[], int *v)
+{
+    validas[0] = 0;
+    validarJog(e, validas,v);
+    ordenar(validas, *v);
+    int r;
+    time_t t;
+    srand((unsigned)time(&t));
+    r = (rand()%5);
+    if (r < (*v) && r >0)
+        return r;
+}
+
+void hint(ESTADO e,int validas[],int *v)
+{
+    int i, j, x, y,p;
+    validas[0] = 0;
+    validarJog(e, validas,v);
+    ordenar(validas, *v);
+    darXy(v[alea(e,validas,v)], &x , &y, &p);
+    printf("\n");
+    for(i = 0;i<8;i++)
+    {
+        for(j = 0;j<8;j++)
+        {
+            if(x == i && y == j)
+                printf("? ");
+            else
+                printaValor(e.grelha[i][j]);
+        }
+        putchar('\n');
+    }
+}
+
+int checkawin(ESTADO e)
+{
+    int r = 1,i,j;
+    for(i = 0;i<8;i++)
+    {
+        for(j = 0;j<8;j++)
+        {
+            if(e.grelha[i][j] == VAZIA)
+            {
+                r = 0;
+                return r;
+            }
+        }
+    }
+    return r;
+}
+
+void win(ESTADO e)
+{
+    if(checkawin(e))
+    {
+        if(e.scoresx > e.scoreo)
+            printf("Ganhou o jogador X !");
+        else
+            printf("Ganhou o jogador O !");
+    }
+}

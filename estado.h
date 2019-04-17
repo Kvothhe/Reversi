@@ -54,5 +54,9 @@ void push(ESTADO);
 ESTADO pop();
 void saveEstado (char*, ESTADO*, int*, int*);
 void carregaEstado (char*, ESTADO*);
+int alea(ESTADO,int*,int*);
+void hint(ESTADO,int*,int *);
+int checkawin(ESTADO);
+void win(ESTADO);
 
 #endif //PROJ_ESTADO_H
