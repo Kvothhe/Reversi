@@ -14,6 +14,7 @@ int main()
     ESTADO e = {0};
 
     // estado inicial do tabuleiro. Inicio do jogo!
+
     e.grelha[3][4] = VALOR_X;
     e.grelha[4][3] = VALOR_X;
     e.grelha[3][3] = VALOR_O;
@@ -25,7 +26,6 @@ int main()
     e.grelha[2][3] = VALOR_X;
     e.grelha[1][3] = VALOR_O;
 */
-
 
     //e.grelha[2][2] = VALOR_X;
     //zerarValidas();
@@ -56,7 +56,12 @@ int main()
             case 'J':
                 sscanf(linha, "%c %d %d", &c1, &x, &y);
                 zerarValidas(validas);
-                capturapecas(&e,x,y,validas,&v);
+                capturapecas(&e,&x,&y,validas,&v);
+                if(checkawin(e))
+                {
+                    win(e);
+                    exit(1);
+                }
                 //push(e);
                 break;
             case 'S':
