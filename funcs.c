@@ -650,11 +650,12 @@ int alea(ESTADO e,int validas[], int *v)
 void hint(ESTADO e,int validas[],int *v)
 {
     int i, j, x, y,p;
+
     validas[0] = 0;
     validarJog(e, validas,v);
     ordenar(validas, *v);
-    darXy(v[alea(e,validas,v)], &x , &y, &p);
-    printf("\n");
+    darXy(validas[alea(e,validas,v)], &x , &y, &p);
+
     for(i = 0;i<8;i++)
     {
         for(j = 0;j<8;j++)

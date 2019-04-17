@@ -60,7 +60,7 @@ int main()
                 if(checkawin(e))
                 {
                     win(e);
-                    exit(1);
+                    linha[0] = 'Q';
                 }
                 //push(e);
                 break;
