@@ -14,7 +14,6 @@ int main()
     ESTADO e = {0};
 
     // estado inicial do tabuleiro. Inicio do jogo!
-
     e.grelha[3][4] = VALOR_X;
     e.grelha[4][3] = VALOR_X;
     e.grelha[3][3] = VALOR_O;
@@ -58,7 +57,6 @@ int main()
                 sscanf(linha, "%c %d %d", &c1, &x, &y);
                 zerarValidas(validas);
                 capturapecas(&e,x,y,validas,&v);
-                win(e);
                 //push(e);
                 break;
             case 'S':
@@ -67,7 +65,10 @@ int main()
                 break;
             case 'H':
                 //validas[0] = "\0";
-                hint(e,validas,&v);
+                for (int k = 0; k < 512 && validas[k] != 888 ; ++k) {
+                    printf("%d", validas[k]);
+                    putchar('\n');
+                }
                 // Sugestão de jogada. Deve ser colocado um ‘?’ no sitio sugerido.
                 break;
             case 'U':

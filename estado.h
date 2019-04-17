@@ -48,7 +48,7 @@ void zerarValidas(int*);
 void validarJog(ESTADO, int*,int*);
 void ordenar(int*,int);
 int posv(ESTADO,int*,int,int,int,int*);
-void capturapecas(ESTADO*,int,int,int*,int *);
+void capturapecas(ESTADO*,int*,int*,int*,int *);
 void scores(ESTADO*);
 void push(ESTADO);
 ESTADO pop();
