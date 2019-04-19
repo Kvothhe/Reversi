@@ -58,5 +58,6 @@ int alea(ESTADO,int*,int*);
 void hint(ESTADO,int*,int *);
 int checkawin(ESTADO);
 void win(ESTADO);
+ESTADO botfacil(ESTADO e,int validas[],int *v);
 
 #endif //PROJ_ESTADO_H

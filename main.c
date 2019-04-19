@@ -12,6 +12,7 @@ int main()
     int validas[512] = {};
     int v;
     ESTADO e = {0};
+    ESTADO p;
 
     // estado inicial do tabuleiro. Inicio do jogo!
 
@@ -57,6 +58,7 @@ int main()
                 sscanf(linha, "%c %d %d", &c1, &x, &y);
                 zerarValidas(validas);
                 capturapecas(&e,&x,&y,validas,&v);
+                printa(e);
                 if(checkawin(e))
                 {
                     win(e);
@@ -84,6 +86,9 @@ int main()
                 sscanf(linha, "%c %c %d", &c1, &c2, &nivel);
                 printf("Bot joga com %c, nível %d\n", pCima(c2), nivel);*/
                 sscanf(linha,"%c",&c1);
+                p = botfacil(e,validas,&v);
+                e = p;
+                printa(e);
                 break;
         }
     } while(pCima(linha[0]) != 'Q');

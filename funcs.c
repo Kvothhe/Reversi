@@ -481,7 +481,6 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
         e->grelha[*a][*b] = e->peca;
         e->peca = contrario(e->peca);
         scores(e);
-        printa(*e);
         push(*e);
         *a = 8;
         *b = 8;
@@ -489,7 +488,6 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
     else
     {
         scores(e);
-        printa(*e);
         printf("\nJogada Inválida\n");
     }
 }
@@ -689,6 +687,7 @@ int checkawin(ESTADO e)
             {
                 r = 0;
                 return r;
+
             }
         }
     }
@@ -704,4 +703,37 @@ void win(ESTADO e)
         else
             printf("Ganhou o jogador O !");
     }
+}
+
+ESTADO botfacil(ESTADO e,int validas[],int *v)
+{
+    int max = 0,x,y,p,sum = 0;
+    ESTADO t = e;
+    ESTADO h = e;
+
+    validas[0] = 0;
+    validarJog(t, validas,v);
+    ordenar(validas,*v);
+    //sum = e.scoreo;//fica sempre com o score inicial do estado e que é o estado inicial
+    /*int j
+    for(j = 0;j < (*v);j++)
+    {
+        t = e;
+        darXy(validas[j],&x,&y,&p);
+        //printf("%d",validas[j]);
+        //t.peca = contrario(e.peca);
+        capturapecas(&t,&x,&y,validas,v);
+        scores(&t);
+        if(t.scoreo > max)
+        {
+            max = t.scoreo;
+            h = t;
+        }
+        t.scoreo = sum;
+        t.grelha[x][y] = VAZIA;
+    }*/
+    darXy(validas[0],&x,&y,&p);
+    capturapecas(&t,&x,&y,validas,v);
+    h = t;
+    return h;
 }
