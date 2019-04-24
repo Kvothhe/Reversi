@@ -35,10 +35,10 @@ struct Node
 };
 struct Node* top;
 
-void printa(ESTADO);
+void printa(ESTADO, int);
 
 int pCima(char);
-void newGame(ESTADO*, int);
+void newGame(ESTADO*, int, int);
 void limpar(ESTADO*);
 void valida(ESTADO, int*,int*);
 void jogaveis(ESTADO, int, int, int*,int*);
@@ -48,7 +48,7 @@ void zerarValidas(int*);
 void validarJog(ESTADO, int*,int*);
 void ordenar(int*,int);
 int posv(ESTADO,int*,int,int,int,int*);
-void capturapecas(ESTADO*,int*,int*,int*,int *);
+void capturapecas(ESTADO*,int*,int*,int*,int *, int *);
 void scores(ESTADO*);
 void push(ESTADO);
 ESTADO pop();
@@ -58,6 +58,6 @@ int alea(ESTADO,int*,int*);
 void hint(ESTADO,int*,int *);
 int checkawin(ESTADO);
 void win(ESTADO);
-ESTADO botfacil(ESTADO e,int validas[],int *v);
+ESTADO botfacil(ESTADO e,int validas[],int *v, int *);
 
 #endif //PROJ_ESTADO_H

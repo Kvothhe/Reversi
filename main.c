@@ -6,13 +6,14 @@
 int main()
 {
 
-    int x,y;
+    int x,y, check;
     char linha[50], file[20];
     char c1,c2;
     int validas[512] = {};
     int v;
     ESTADO e = {0};
     ESTADO p;
+    check = 1;
 
     // estado inicial do tabuleiro. Inicio do jogo!
 
@@ -32,9 +33,10 @@ int main()
     //zerarValidas();
     push(e);
     printf("\n");
-    printa(e);
+    printa(e, check);
     printf("\n");
 
+    check = 0;
     //Comandos
     do {
         fgets(linha,50,stdin);
@@ -42,7 +44,8 @@ int main()
         switch (pCima(linha[0])) {
             case 'N':
                 sscanf(linha, "%c %c", &c1, &c2);
-                newGame(&e,pCima(c2));
+                check = 1;
+                newGame(&e,pCima(c2), check);
                 break;
             case 'L':
                 sscanf(linha, "%c %s", &c1, file);
@@ -56,9 +59,10 @@ int main()
                 break;
             case 'J':
                 sscanf(linha, "%c %d %d", &c1, &x, &y);
+                --y, --x;
                 zerarValidas(validas);
-                capturapecas(&e,&x,&y,validas,&v);
-                printa(e);
+                capturapecas(&e,&x,&y,validas,&v, &check);
+                printa(e, check);
                 if(checkawin(e))
                 {
                     win(e);
@@ -79,15 +83,15 @@ int main()
                 // Para desfazer a última jogada(Undo). Isto tem de permitir desfazer até ao estado inicial do jogo!
                 sscanf(linha,"%c",&c1);
                 e = pop();
-                printa(e);
+                printa(e, check);
                 break;
             case 'A':/*
                 sscanf(linha, "%c %c %d", &c1, &c2, &nivel);
                 printf("Bot joga com %c, nível %d\n", pCima(c2), nivel);*/
                 sscanf(linha,"%c",&c1);
-                p = botfacil(e,validas,&v);
+                p = botfacil(e,validas,&v, &check);
                 e = p;
-                printa(e);
+                printa(e,check);
                 if(checkawin(e))
                 {
                     win(e);

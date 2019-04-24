@@ -15,7 +15,7 @@ int pCima(char c)
     return c;
 }
 
-void newGame(ESTADO* e, int c)
+void newGame(ESTADO* e, int c, int check)
 {
     if (c == 'X' || c == 'O')
     {
@@ -32,7 +32,7 @@ void newGame(ESTADO* e, int c)
             e -> peca = VALOR_O;
         e -> scoreo = 2;
         e -> scoresx = 2;
-        printa(*e);
+        printa(*e, check);
     }
     else
         printf("Novo jogo inválido!\n");
@@ -103,17 +103,21 @@ void darXy(int c, int *x, int *y,int *d)
 //Imprime o estado com '.' que simboliza as jogadas disponiveis
 void valida(ESTADO e, int validas[],int *v)
 {
-    int i, j, z, x, y,p;
+    int i, j, z, x, y,p,a;
 
     i = 0;
     validarJog(e, validas,v);
     ordenar(validas, *v);
     darXy(validas[i], &x , &y, &p);
 
-
-
-    for(j = 0; j < 8;j++)
+    putchar(' ');
+    for (a = 1; a < 9; ++a)
+        printf(" %d",a);
+    putchar('\n');
+    a = 1;
+    for(j = 0; j < 8;j++, ++a)
     {
+        printf("%d ", a);
         for (z = 0; z < 8; ++z)
         {
             if (x == j && y == z)
@@ -354,17 +358,17 @@ int posv(ESTADO e,int validas[],int k,int l,int p,int*v)
 }
 
 
-void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
+void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v, int *check)
 {
-    int a_it,b_it, check;
+    int a_it,b_it;
 
-    check = 0;
+    *check = 0;
     //Come Baixo
     if(posv(*e,validas,*a,*b,0,v))
     {
         //e->grelha[a][b] = e->peca;
         //printf("\n%d %d\n", *a, *b);
-        check = 1;
+        *check = 1;
         a_it = *a + 1, b_it = *b;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
@@ -378,7 +382,7 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
     {
         //e->grelha[a][b] = e->peca;
         //printf("\n%d %d\n", *a, *b);
-        check = 1;
+        *check = 1;
         a_it = *a - 1, b_it = *b;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
@@ -393,7 +397,7 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
     {
         //e->grelha[a][b] = e->peca;
         //printf("\n%d %d\n", *a, *b);
-        check = 1;
+        *check = 1;
         a_it = *a, b_it = *b + 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
@@ -407,7 +411,7 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
     {
         //e->grelha[a][b] = e->peca;
         //printf("\n%d %d\n", *a, *b);
-        check = 1;
+        *check = 1;
         a_it = *a, b_it = *b - 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
@@ -421,7 +425,7 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
     {
         //e->grelha[a][b] = e->peca;
         //printf("\n%d %d\n", *a, *b);
-        check = 1;
+        *check = 1;
         a_it = *a - 1, b_it = *b - 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
@@ -436,7 +440,7 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
     {
         //e->grelha[a][b] = e->peca;
         //printf("\n%d %d\n", *a, *b);
-        check = 1;
+        *check = 1;
         a_it = *a+1, b_it = *b - 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
@@ -451,7 +455,7 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
     {
         //e->grelha[a][b] = e->peca;
         //printf("\n%d %d\n", *a, *b);
-        check = 1;
+        *check = 1;
         a_it = *a -1, b_it = *b + 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
@@ -466,7 +470,7 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
     {
         //e->grelha[a][b] = e->peca;
         //printf("\n%d %d\n", *a, *b);
-        check = 1;
+        *check = 1;
         a_it = *a + 1, b_it = *b + 1;
         while(e->grelha[a_it][b_it] == contrario(e->peca))
         {
@@ -476,7 +480,7 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
         }
         //e->peca = contrario(e->peca);
     }
-    if (check == 1)
+    if (*check == 1)
     {
         e->grelha[*a][*b] = e->peca;
         e->peca = contrario(e->peca);
@@ -484,11 +488,6 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v)
         push(*e);
         *a = 8;
         *b = 8;
-    }
-    else
-    {
-        scores(e);
-        printf("\nJogada Inválida\n");
     }
 }
 void zerarValidas(int validas[])
@@ -705,7 +704,7 @@ void win(ESTADO e)
     }
 }
 
-ESTADO botfacil(ESTADO e,int validas[],int *v)
+ESTADO botfacil(ESTADO e,int validas[],int *v, int *check)
 {
     int max = 0,x,y,p,sum = 0;
     ESTADO t = e;
@@ -722,7 +721,7 @@ ESTADO botfacil(ESTADO e,int validas[],int *v)
         darXy(validas[j],&x,&y,&p);
         //printf("%d",validas[j]);
         //t.peca = contrario(e.peca);
-        capturapecas(&t,&x,&y,validas,v);
+        capturapecas(&t,&x,&y,validas,v,check);
         scores(&t);
         if(t.scoreo > max)
         {
@@ -733,7 +732,8 @@ ESTADO botfacil(ESTADO e,int validas[],int *v)
         t.grelha[x][y] = VAZIA;
     }
     darXy(validas[0],&x,&y,&p);
-    capturapecas(&t,&x,&y,validas,v);
+    capturapecas(&t,&x,&y,validas,v, check);
+    *check = 1;
     h = t;
     return h;
 }
