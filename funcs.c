@@ -714,8 +714,8 @@ ESTADO botfacil(ESTADO e,int validas[],int *v)
     validas[0] = 0;
     validarJog(t, validas,v);
     ordenar(validas,*v);
-    //sum = e.scoreo;//fica sempre com o score inicial do estado e que é o estado inicial
-    /*int j
+    sum = e.scoreo;//fica sempre com o score inicial do estado e que é o estado inicial
+    int j;
     for(j = 0;j < (*v);j++)
     {
         t = e;
@@ -731,7 +731,7 @@ ESTADO botfacil(ESTADO e,int validas[],int *v)
         }
         t.scoreo = sum;
         t.grelha[x][y] = VAZIA;
-    }*/
+    }
     darXy(validas[0],&x,&y,&p);
     capturapecas(&t,&x,&y,validas,v);
     h = t;
