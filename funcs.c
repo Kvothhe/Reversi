@@ -497,6 +497,17 @@ void zerarValidas(int validas[])
     while(validas[i])
         validas[i] = 0;
 }
+void passaJogada(ESTADO* e, int validas[], int* v)
+{
+    zerarValidas(validas);
+    validarJog(*e,validas,v);
+    if(validas[0] == 888 && e->scoresx !=0 && e->scoreo != 0)
+    {
+        e->peca = contrario(e->peca);
+        printf("O jogador tem de passar!\n");
+    }
+}
+
 VALOR contrario(VALOR v)
 {
 

@@ -63,6 +63,7 @@ int main()
                 zerarValidas(validas);
                 capturapecas(&e,&x,&y,validas,&v, &check);
                 printa(e, check);
+                passaJogada(&e,validas,&v);
                 if(checkawin(e))
                 {
                     win(e);

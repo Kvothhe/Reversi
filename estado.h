@@ -45,6 +45,7 @@ void jogaveis(ESTADO, int, int, int*,int*);
 VALOR contrario(VALOR v);
 void printaValor(VALOR v);
 void zerarValidas(int*);
+void passaJogada(ESTADO*, int*, int*);
 void validarJog(ESTADO, int*,int*);
 void ordenar(int*,int);
 int posv(ESTADO,int*,int,int,int,int*);
