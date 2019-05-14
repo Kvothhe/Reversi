@@ -501,10 +501,13 @@ void passaJogada(ESTADO* e, int validas[], int* v)
 {
     zerarValidas(validas);
     validarJog(*e,validas,v);
-    if(validas[0] == 888 && e->scoresx !=0 && e->scoreo != 0)
+    if(validas[0] == 888 && (e->scoresx !=0 || e->scoreo != 0))
     {
         e->peca = contrario(e->peca);
         printf("O jogador tem de passar!\n");
+        validarJog(*e, validas, v);
+        if (validas[0] == 888)
+            win(*e);
     }
 }
 
@@ -706,13 +709,10 @@ int checkawin(ESTADO e)
 
 void win(ESTADO e)
 {
-    if(checkawin(e))
-    {
         if(e.scoresx > e.scoreo)
-            printf("Ganhou o jogador X !");
+            printf("Ganhou o jogador X !\n");
         else
-            printf("Ganhou o jogador O !");
-    }
+            printf("Ganhou o jogador O !\n");
 }
 
 ESTADO botfacil(ESTADO e,int validas[],int *v, int *check)

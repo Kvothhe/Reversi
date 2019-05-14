@@ -62,8 +62,8 @@ int main()
                 --y, --x;
                 zerarValidas(validas);
                 capturapecas(&e,&x,&y,validas,&v, &check);
-                printa(e, check);
                 passaJogada(&e,validas,&v);
+                printa(e, check);
                 if(checkawin(e))
                 {
                     win(e);
