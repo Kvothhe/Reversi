@@ -40,6 +40,7 @@ void printa(ESTADO, int);
 int pCima(char);
 void newGame(ESTADO*, int, int);
 void limpar(ESTADO*);
+void darXy(int, int* , int* ,int*);
 void valida(ESTADO, int*,int*);
 void jogaveis(ESTADO, int, int, int*,int*);
 VALOR contrario(VALOR v);
@@ -59,6 +60,7 @@ int alea(ESTADO,int*,int*);
 void hint(ESTADO,int*,int *);
 int checkawin(ESTADO);
 void win(ESTADO);
-ESTADO botfacil(ESTADO e,int validas[],int *v, int *);
+VALOR ePeca(char);
+void bot(ESTADO*,char ,int ,int* ,int* , int*);
 
 #endif //PROJ_ESTADO_H

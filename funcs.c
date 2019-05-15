@@ -714,14 +714,38 @@ void win(ESTADO e)
         else
             printf("Ganhou o jogador O !\n");
 }
-
-ESTADO botfacil(ESTADO e,int validas[],int *v, int *check)
+VALOR ePeca(char c)
 {
+    VALOR v;
+
+    if (c == 'X')
+        v = VALOR_X;
+    else
+        v = VALOR_O;
+
+    return v;
+}
+
+void bot(ESTADO* e,char peca,int nivel,int validas[],int *v, int *check)
+{
+    //Bot fácil
+    if (nivel == 1 && ePeca(peca) == e->peca)
+    {
+        int x,y,d;
+
+        validarJog(*e,validas,v);
+        darXy(validas[0],&x,&y,&d);
+        capturapecas(e,&x,&y,validas,v,check);
+        printa(*e,*check);
+    }
+
+
+    /*
     int max = 0,x,y,p,sum = 0;
     ESTADO t = e;
     ESTADO h = e;
 
-    validas[0] = 0;
+    zerarValidas(validas);
     validarJog(t, validas,v);
     ordenar(validas,*v);
     sum = e.scoreo;//fica sempre com o score inicial do estado e que é o estado inicial
@@ -747,4 +771,5 @@ ESTADO botfacil(ESTADO e,int validas[],int *v, int *check)
     *check = 1;
     h = t;
     return h;
+     */ //pode vir a ser usado em outra dificuldade
 }

@@ -6,7 +6,7 @@
 int main()
 {
 
-    int x,y, check;
+    int x,y, check, nivel;
     char linha[50], file[20];
     char c1,c2;
     int validas[512] = {};
@@ -64,6 +64,8 @@ int main()
                 capturapecas(&e,&x,&y,validas,&v, &check);
                 passaJogada(&e,validas,&v);
                 printa(e, check);
+                if(e.modo == 1)
+                    bot(&e,pCima(c2),nivel,validas,&v, &check);
                 if(checkawin(e))
                 {
                     win(e);
@@ -86,18 +88,16 @@ int main()
                 e = pop();
                 printa(e, check);
                 break;
-            case 'A':/*
+            case 'A':
                 sscanf(linha, "%c %c %d", &c1, &c2, &nivel);
-                printf("Bot joga com %c, nível %d\n", pCima(c2), nivel);*/
-                sscanf(linha,"%c",&c1);
-                p = botfacil(e,validas,&v, &check);
-                e = p;
-                printa(e,check);
-                if(checkawin(e))
+                printf("Bot joga com %c, nível %d\n", pCima(c2), nivel);
+                if((nivel == 1 || nivel == 2 || nivel == 3) && (pCima(c2) == 'X' || pCima(c2) == 'O'))
                 {
-                    win(e);
-                    linha[0] = 'Q';
+                    e.modo = 1;
+                    bot(&e, pCima(c2), nivel, validas, &v, &check);
                 }
+                else
+                    printf("Bot Inválido\n");
                 break;
         }
     } while(pCima(linha[0]) != 'Q');

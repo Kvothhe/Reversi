@@ -13,6 +13,8 @@ void printa(ESTADO e, int check)
 
     if (e.modo == 0)
         printf("Modo: 2jog");
+    else
+        printf("Modo: 1jog");
     if (e.peca == VALOR_O)
         printf("-- Jogador: O\n ");
     else
