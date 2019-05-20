@@ -7,6 +7,9 @@
 #include "estado.h"
 #include <time.h>
 
+/**
+ * Coloca Char em maiusculo.
+ */
 int pCima(char c)
 {
     if (c >= 97 && c <= 122)
@@ -15,6 +18,9 @@ int pCima(char c)
     return c;
 }
 
+/**
+ * Cria um novo jogo.
+ */
 void newGame(ESTADO* e, int c, int check)
 {
     if (c == 'X' || c == 'O')
@@ -38,6 +44,7 @@ void newGame(ESTADO* e, int c, int check)
         printf("Novo jogo inválido!\n");
 
 }
+
 // Coloca todas as posicoes vazias
 void limpar(ESTADO* e)
 {
@@ -47,6 +54,7 @@ void limpar(ESTADO* e)
         for (j = 0; j < 8; ++j)
             e -> grelha[i][j] = VAZIA;
 }
+
 //Imprime a peca que esta a jogar
 void printaValor(VALOR v)
 {
@@ -74,6 +82,9 @@ void validarJog(ESTADO e, int validas[],int *v)
     validas[*v] = 888;
 }
 
+/**
+ * Transforma três inteiros em um valor de três digitos.
+ */
 void darXy(int c, int *x, int *y,int *d)
 {
 
@@ -139,6 +150,9 @@ void valida(ESTADO e, int validas[],int *v)
 
 }
 
+/**
+ * Ordena o array.
+ */
 void ordenar(int array[], int n)
 {
     int i, key, j;
@@ -157,6 +171,7 @@ void ordenar(int array[], int n)
         array[j + 1] = key;
     }
 }
+
 //Deteta as posicoes jogaveis a partir de uma posicao
 void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
 {
@@ -340,6 +355,9 @@ void jogaveis(ESTADO e, int a, int b, int validas[], int* v)
         }
     }
 }
+/**
+ * Retorna 1 se uma posiçao é valida a partir de coordenadas e de uma determinada direção, retorna 0 caso não seja valida.
+ */
 int posv(ESTADO e,int validas[],int k,int l,int p,int*v)
 {
     int x,y,i,z;
@@ -357,7 +375,9 @@ int posv(ESTADO e,int validas[],int k,int l,int p,int*v)
     return 0;
 }
 
-
+/**
+ * Altera as peças do tabuleiro conforme as peças jogadas.
+ */
 void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v, int *check)
 {
     int a_it,b_it;
@@ -490,6 +510,10 @@ void capturapecas(ESTADO* e,int *a,int *b,int *validas,int *v, int *check)
         *b = 8;
     }
 }
+
+/**
+ * Zera o array das válidas.
+ */
 void zerarValidas(int validas[])
 {
     int i = 0;
@@ -497,6 +521,10 @@ void zerarValidas(int validas[])
     while(validas[i])
         validas[i] = 0;
 }
+
+/**
+ * Função que passa a jogada caso não haja nenhuma jogada válida para o jogador.
+ */
 void passaJogada(ESTADO* e, int validas[], int* v)
 {
     zerarValidas(validas);
@@ -511,6 +539,9 @@ void passaJogada(ESTADO* e, int validas[], int* v)
     }
 }
 
+/**
+ * Devolve a peça contraria à dada.
+ */
 VALOR contrario(VALOR v)
 {
 
@@ -522,6 +553,9 @@ VALOR contrario(VALOR v)
     return v;
 }
 
+/**
+ * Acrescenta um ou mais pontos a um jogador.
+ */
 void scores(ESTADO* e)
 {
     e->scoreo = 0;
@@ -539,6 +573,9 @@ void scores(ESTADO* e)
     }
 }
 
+/**
+ * Coloca um estado no topo de uma stack, server para desfazer as jogadas.
+ */
 void push(ESTADO e){
     struct Node* temp;
     temp = (struct Node*)malloc(sizeof(struct Node));
@@ -551,6 +588,9 @@ void push(ESTADO e){
     top = temp;
 }
 
+/**
+ * Retira o estado do topo da stack e coloca-o no estado do jogo.
+ */
 ESTADO pop(){
     struct Node* temp;
     if (top == NULL)
@@ -565,6 +605,9 @@ ESTADO pop(){
     return (top->e);
 }
 
+/**
+ * Guarda um estado num ficheiro.
+ */
 void saveEstado(char* nome, ESTADO* estado, int validas[], int *v)
 {
     FILE* file;
@@ -613,6 +656,9 @@ void saveEstado(char* nome, ESTADO* estado, int validas[], int *v)
     fclose(file);
 }
 
+/**
+ * Carrega um estado de um determinado ficheiro.
+ */
 void carregaEstado(char* nome, ESTADO* estado)
 {
     FILE* file;
@@ -654,6 +700,9 @@ void carregaEstado(char* nome, ESTADO* estado)
     fclose(file);
 }
 
+/**
+ * Devolve uma posição aleatoria.
+ */
 int alea(ESTADO e,int validas[], int *v)
 {
     validas[0] = 0;
@@ -667,6 +716,9 @@ int alea(ESTADO e,int validas[], int *v)
         return r;
 }
 
+/**
+ * Imprime um '?' como jogada possível no ecrã.
+ */
 void hint(ESTADO e,int validas[],int *v)
 {
     int i, j, x, y,p;
@@ -689,6 +741,9 @@ void hint(ESTADO e,int validas[],int *v)
     }
 }
 
+/**
+ * Vê se o jogo acabou e quem é que o ganhou.
+ */
 int checkawin(ESTADO e)
 {
     int r = 1,i,j;
@@ -707,6 +762,9 @@ int checkawin(ESTADO e)
     return r;
 }
 
+/**
+ * Imprime o vencedor.
+ */
 void win(ESTADO e)
 {
         if(e.scoresx > e.scoreo)
@@ -714,6 +772,10 @@ void win(ESTADO e)
         else
             printf("Ganhou o jogador O !\n");
 }
+
+/**
+ * Devolve o valor da peça dado um char.
+ */
 VALOR ePeca(char c)
 {
     VALOR v;
@@ -726,6 +788,9 @@ VALOR ePeca(char c)
     return v;
 }
 
+/**
+ * Bot do jogo.
+ */
 void bot(ESTADO* e,char peca,int nivel,int validas[],int *v, int *check)
 {
     //Bot fácil

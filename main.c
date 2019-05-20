@@ -89,6 +89,7 @@ int main()
                 printa(e, check);
                 break;
             case 'A':
+                // Comando para inicializar o bot. Possui três niveis de dificuldade.
                 sscanf(linha, "%c %c %d", &c1, &c2, &nivel);
                 printf("Bot joga com %c, nível %d\n", pCima(c2), nivel);
                 if((nivel == 1 || nivel == 2 || nivel == 3) && (pCima(c2) == 'X' || pCima(c2) == 'O'))
